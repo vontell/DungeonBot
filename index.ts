@@ -29,7 +29,11 @@ export function configureBot(bot: RGBot) {
 
 export async function runTurn(bot: RGBot) {
     try {
-        console.log("Waiting for logic...")
+        
+        // Find the closest diamond and approach it
+        const diamondBlock = bot.findBlock("diamond")
+        bot.chat(JSON.stringify(diamondBlock))
+
     } catch(exception) {
         console.warn(exception)
     }

@@ -31,9 +31,9 @@ export async function runTurn(bot: RGBot) {
     try {
         
         // Find the closest diamond and approach it
-        const diamondBlock = bot.findBlock("diamond_block")
+        const diamondBlock = bot.findBlocks("diamond_block")
         bot.chat(JSON.stringify(diamondBlock))
-        bot.waitForMilliseconds(4000)
+        await bot.waitForMilliseconds(4000)
 
     } catch(exception) {
         console.warn(exception)

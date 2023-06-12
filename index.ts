@@ -35,7 +35,7 @@ export async function runTurn(bot: RGBot) {
         const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]
         const diamondBlock = bot.mineflayer().findBlocks({ matching: ids, maxDistance: 32 })[0]
         bot.chat(JSON.stringify(diamondBlock))
-        await bot.approachBlock(diamondBlock)
+        await bot.approachPosition(diamondBlock)
         await bot.waitForMilliseconds(4000)
     } catch(exception) {
         console.warn(exception)

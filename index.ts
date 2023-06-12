@@ -25,12 +25,15 @@ export function configureBot(bot: RGBot) {
     // Load the armor-manager plugin (https://github.com/PrismarineJS/MineflayerArmorManager)
     bot.mineflayer().loadPlugin(armorManager)
 
+    bot.chat("I'm ready to conquer this dungeon... I think")
+
 }
 
 export async function runTurn(bot: RGBot) {
     try {
         // Find the closest diamond and approach it
-        const diamondBlock = await bot.findBlock("diamond", {partialMatch: true})
+        const ids = [bot.registry.blocksByName["diamond_block"].id]
+        const diamondBlock = bot.findBlocks({ matching: ids, maxDistance: 32 })
         bot.chat(JSON.stringify(diamondBlock))
         await bot.waitForMilliseconds(4000)
     } catch(exception) {

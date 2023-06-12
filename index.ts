@@ -29,12 +29,10 @@ export function configureBot(bot: RGBot) {
 
 export async function runTurn(bot: RGBot) {
     try {
-        
         // Find the closest diamond and approach it
-        const diamondBlock = await bot.findBlock("DIAMOND_BLOCK")
+        const diamondBlock = await bot.findBlock("diamond", {partialMatch: true})
         bot.chat(JSON.stringify(diamondBlock))
         await bot.waitForMilliseconds(4000)
-
     } catch(exception) {
         console.warn(exception)
     }

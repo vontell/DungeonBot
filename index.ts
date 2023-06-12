@@ -31,8 +31,7 @@ export async function runTurn(bot: RGBot) {
     try {
         
         // Find the closest diamond and approach it
-        console.log(bot.mcData.blocksByName["DIAMOND_BLOCK"])
-        const diamondBlock = bot.mineflayer().findBlock({"blockNames": [bot.mcData.blocksByName["DIAMOND_BLOCK"]]})
+        const diamondBlock = await bot.findBlock("DIAMOND_BLOCK")
         bot.chat(JSON.stringify(diamondBlock))
         await bot.waitForMilliseconds(4000)
 

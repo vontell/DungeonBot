@@ -44,12 +44,13 @@ export async function runTurn(bot: RGBot) {
     if (!move) return;
     try {
         // Find the closest diamond and approach it
-        // const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]
-        // const diamondBlock = bot.mineflayer().findBlocks({ matching: ids, maxDistance: 32 })[0]
-        // bot.chat(JSON.stringify(diamondBlock))
-        // await bot.approachPosition(diamondBlock)
-        // await bot.waitForMilliseconds(4000)
-        await bot.findAndCollectItemsOnGround()
+        const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]
+        const diamondBlock = bot.mineflayer().findBlocks({ matching: ids, maxDistance: 32 })[0]
+        bot.chat(JSON.stringify(diamondBlock))
+        await bot.approachPosition(diamondBlock)
+        if (!diamondBlock) {
+            await bot.findAndCollectItemsOnGround()
+        }
     } catch(exception) {
         console.warn(exception)
     }

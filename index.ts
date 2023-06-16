@@ -6,6 +6,7 @@ import {Entity} from 'prismarine-entity'
 
 const armorManager = require('mineflayer-armor-manager')
 
+var move = false;
 
 /**
  * This capture the flag bot covers most possibilities you could have in a main loop bot.
@@ -27,9 +28,20 @@ export function configureBot(bot: RGBot) {
 
     bot.chat("I'm ready to conquer this dungeon... I think")
 
+    bot.on('chat', (one: string, two: string) => {
+        console.log(one, two)
+        if (one == "start" || two == "start") {
+            move = true;
+        }
+        if (one == "stop" || two == "stop") {
+            move = false
+        }
+    })
+
 }
 
 export async function runTurn(bot: RGBot) {
+    if (!move) return;
     try {
         // Find the closest diamond and approach it
         const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]

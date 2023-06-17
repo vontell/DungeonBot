@@ -49,6 +49,13 @@ export async function runTurn(bot: RGBot) {
         if (level == "2") {
             await bot.findAndCollectItemsOnGround()
         }
+        if (level == "3") {
+            await bot.findAndCollectItemsOnGround()
+            let nearbyEnemies = bot.findEntities()
+            if (nearbyEnemies) {
+                await bot.attackEntity(nearbyEnemies[0].result)
+            }
+        }
     } catch(exception) {
         console.warn(exception)
     }

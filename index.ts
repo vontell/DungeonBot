@@ -59,7 +59,7 @@ export async function runTurn(bot: RGBot) {
         if (level == "4") {
             await bot.findAndCollectItemsOnGround()
             bot.allowParkour(true)
-            await bot.approachPosition(new Vec3(0, 5, 16))
+            await bot.approachPosition(new Vec3(0, 95, 16))
         }
     } catch(exception) {
         console.warn(exception)

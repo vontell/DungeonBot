@@ -6,7 +6,7 @@ import {Entity} from 'prismarine-entity'
 
 const armorManager = require('mineflayer-armor-manager')
 
-var move = false;
+var level = null
 
 /**
  * This capture the flag bot covers most possibilities you could have in a main loop bot.
@@ -28,29 +28,27 @@ export function configureBot(bot: RGBot) {
 
     bot.chat("I'm ready to conquer this dungeon... I think")
 
-    bot.on('chat', (one: string, two: string) => {
-        console.log(one, two)
-        if (one == "start" || two == "start") {
-            move = true;
-        }
-        if (one == "stop" || two == "stop") {
-            move = false
+    bot.on('chat', (player: string, message: string) => {
+        if (message.startsWith("run")) {
+            level = message.split(" ")[1]
         }
     })
 
 }
 
 export async function runTurn(bot: RGBot) {
-    if (!move) return;
+    if (!level) return;
     try {
-        // Find the closest diamond and approach it
-        // const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]
-        // const diamondBlock = bot.mineflayer().findBlocks({ matching: ids, maxDistance: 32 })[0]
-        // bot.chat(JSON.stringify(diamondBlock))
-        // await bot.approachPosition(diamondBlock)
-        // if (!diamondBlock) {
+        if (level == "1") {
+            // Find the closest diamond and approach it
+            const ids = [bot.mineflayer().registry.blocksByName["diamond_block"].id]
+            const diamondBlock = bot.mineflayer().findBlocks({ matching: ids, maxDistance: 32 })[0]
+            bot.chat(JSON.stringify(diamondBlock))
+            await bot.approachPosition(diamondBlock)
+        }
+        if (level == "2") {
             await bot.findAndCollectItemsOnGround()
-        // }
+        }
     } catch(exception) {
         console.warn(exception)
     }

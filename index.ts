@@ -61,6 +61,11 @@ export async function runTurn(bot: RGBot) {
             bot.allowParkour(true)
             await bot.approachPosition(new Vec3(0, 95, 16))
         }
+        if (level == "bridge") {
+            await bot.findAndCollectItemsOnGround()
+            bot.allowParkour(true)
+            await bot.approachPosition(new Vec3(10, 92, 55))
+        }
     } catch(exception) {
         console.warn(exception)
     }
